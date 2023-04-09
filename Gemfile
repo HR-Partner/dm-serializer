@@ -1,6 +1,6 @@
 require 'pathname'
 
-source :rubygems
+source 'https://rubygems.org'
 
 gemspec
 
@@ -17,7 +17,7 @@ gem 'dm-core', DM_VERSION,
   :branch => CURRENT_BRANCH
 
 gem 'fastercsv',  '~> 1.5.4'
-gem 'multi_json', '~> 1.3.2'
+gem 'multi_json', '~> 1.15'
 gem 'json',       '~> 1.5.4', :platforms => [ :ruby_18, :jruby ]
 gem 'json_pure',  '~> 1.5.4', :platforms => [ :mswin ]
 
@@ -27,19 +27,13 @@ group :development do
     :branch => CURRENT_BRANCH
 end
 
-group :testing do
-  gem 'nokogiri',    '~> 1.4.4'
-  gem 'libxml-ruby', '~> 2.2.2', :platforms => [ :mri, :mswin ]
+group :test do
+  gem 'nokogiri' #,    '~> 1.14.2'
+  gem 'libxml-ruby' #, '~> 2.2.2', :platforms => [ :mri, :mswin ]
 end
 
-platforms :mri_18 do
-  group :quality do
-
-    gem 'rcov',      '~> 0.9.10'
-    gem 'yard',      '~> 0.7.2'
-    gem 'yardstick', '~> 0.4'
-
-  end
+group :test do
+  gem 'rspec'
 end
 
 group :datamapper do

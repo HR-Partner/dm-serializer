@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'json'
 
 describe DataMapper::Serializer, '#to_json' do
   #

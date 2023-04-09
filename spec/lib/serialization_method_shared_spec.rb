@@ -1,4 +1,4 @@
-share_examples_for 'A serialization method that also serializes core classes' do
+shared_examples 'A serialization method that also serializes core classes' do
   # This spec ensures that we don't break any serialization methods attached
   # to core classes, such as Array
   before(:all) do
@@ -43,7 +43,7 @@ share_examples_for 'A serialization method that also serializes core classes' do
   end
 end
 
-share_examples_for 'A serialization method' do
+shared_examples 'A serialization method' do
   before(:all) do
     %w[ @harness ].each do |ivar|
       raise "+#{ivar}+ should be defined in before block" unless instance_variable_get(ivar)
@@ -241,18 +241,18 @@ share_examples_for 'A serialization method' do
       result.values_at(*%w{id composite name breed}).should == [1, 322, "Harry", "Angus"]
     end
 
-    it "serializes a many to many relationship" do
-      pending 'TODO: fix many to many in dm-core' do
-        p1 = Planet.create(:name => 'earth')
-        p2 = Planet.create(:name => 'mars')
+    xit "serializes a many to many relationship" do
+      # pending 'TODO: fix many to many in dm-core' do
+      p1 = Planet.create(:name => 'earth')
+      p2 = Planet.create(:name => 'mars')
 
-        FriendedPlanet.create(:planet => p1, :friend_planet => p2)
+      FriendedPlanet.create(:planet => p1, :friend_planet => p2)
 
-        result = @harness.test(p1.reload.friend_planets)
-        result.should be_kind_of(Array)
+      result = @harness.test(p1.reload.friend_planets)
+      result.should be_kind_of(Array)
 
-        result[0]["name"].should == "mars"
-      end
+      result[0]["name"].should == "mars"
+      # end
     end
   end
 
